@@ -6,6 +6,15 @@
     --md-sys-color-outline: #707973;
 }
 
+:root[data-theme="dark"] {
+    --md-sys-color-primary: #4CAF50; /* Example: A slightly different green for dark mode */
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-surface: #121212; /* Dark background for surfaces */
+    --md-sys-color-on-surface: #E0E0E0; /* Lighter text on dark surfaces */
+    --md-sys-color-outline: #8A8A8A; /* Adjusted outline color for dark mode */
+    /* You might need to add or adjust other variables depending on your exact needs */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +23,7 @@
 }
 
 body {
-    background-color: #E6E6E6;
+    background-color: var(--md-sys-color-surface-container-lowest, #E6E6E6); /* Use a variable for body background */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -29,6 +38,7 @@ body {
 
 .card {
     background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface); /* Ensure card text color adapts */
     border-radius: 28px;
     padding: 24px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -61,6 +71,8 @@ input {
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
+    background-color: var(--md-sys-color-surface); /* Ensure input background adapts */
+    color: var(--md-sys-color-on-surface); /* Ensure input text color adapts */
 }
 
 input:focus {
@@ -78,7 +90,8 @@ input:focus {
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--md-sys-color-surface); /* Ensure suggestions background adapts */
+    color: var(--md-sys-color-on-surface); /* Ensure suggestions text color adapts */
     border-radius: 16px;
     margin-top: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -93,13 +106,25 @@ input:focus {
 }
 
 .suggestion-item:hover {
-    background-color: rgba(0, 108, 76, 0.08);
+    background-color: rgba(var(--md-sys-color-primary-rgb, 0, 108, 76), 0.08); /* Adjust hover for dynamic primary color */
+}
+
+.suggestion-item.highlighted {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+/* Ensure highlighted style overrides hover for dark theme if necessary */
+:root[data-theme="dark"] .suggestion-item.highlighted {
+    background-color: var(--md-sys-color-primary); /* Ensure this is a good contrast in dark mode */
+    color: var(--md-sys-color-on-primary);
 }
 
 .result {
     margin-top: 24px;
     padding: 16px;
-    background-color: rgba(0, 108, 76, 0.08);
+    background-color: rgba(var(--md-sys-color-primary-rgb, 0, 108, 76), 0.08); /* Adjust result background for dynamic primary */
+    color: var(--md-sys-color-on-surface); /* Ensure result text color adapts */
     border-radius: 16px;
     display: none;
 }
